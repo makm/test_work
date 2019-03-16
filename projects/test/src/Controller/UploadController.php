@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\ImageResize\PreviewMaker;
 use App\UploadFileProcess\MoveFileProcessorInterface;
+use Swagger\Annotations as SWG;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -45,7 +46,51 @@ class UploadController extends AbstractController
     }
 
     /**
-     * @Route("/upload", methods={"POST","PUT"})
+     * Upload files from any source
+     *
+     * @Route("/api/upload", methods={"POST"})
+     * @SWG\Post(
+     *     consumes={"application/json"}
+     * )
+     *
+     * @SWG\Response(
+     *     response=200,
+     *     description="Returns uploaded files paths",
+     * )
+     *
+     * @SWG\Parameter(
+     *     collectionFormat="multi",
+     *     name="files",
+     *     in="query",
+     *     type="array",
+     *     @SWG\Items(type="string"),
+     *     description="The field or file's sourses"
+     * )
+     *
+     * @SWG\Parameter(
+     *     collectionFormat="multi",
+     *     name="files",
+     *     in="formData",
+     *     type="array",
+     *     @SWG\Items(type="string", format="binary"),
+     *     description="The field string file binary source"
+     * )
+     *
+     * @SWG\Parameter(
+     *     name="files",
+     *     in="body",
+     *     @SWG\Schema(type="object", example={"files":
+     *     {
+     *              "http://kakrig.com/wp-content/cache/thumb/9da6cbcdb_320x200.jpg",
+     *              "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+     *      }
+     *     }),
+     *     type="string",
+     *     description="The field body"
+     * )
+     *
+     * @SWG\Tag(name="Uploads")
+     *
      * @param Request $request
      * @return JsonResponse
      * @throws \Gumlet\ImageResizeException
