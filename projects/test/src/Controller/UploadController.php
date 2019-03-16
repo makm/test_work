@@ -6,16 +6,17 @@ use App\ImageResize\PreviewMaker;
 use App\UploadFileProcess\MoveFileProcessorInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UploadController extends AbstractController
 {
     public const PREVIEW_W = 100;
     public const PREVIEW_H = 100;
+
     /**
      * @var MoveFileProcessorInterface
      */
@@ -39,10 +40,40 @@ class UploadController extends AbstractController
 
     /**
      * @param Request $request
+     * @return array
      */
-    private function fetchFileSource(Request $request)
+    private function fetchSourceListByRequest(Request $request): array
     {
-        
+        /** json body content (only)*/
+        if ($content = $request->getContent()) {
+            $parametersAsArray = json_decode($content, true);
+            return $parametersAsArray['files'] ?? [];
+        }
+
+        $uploadSources = [];
+
+        /**
+         * direct file uploaded
+         */
+
+        if ($uploads = $request->files->get('files')) {
+            foreach ($uploads as $upload) {
+                if ($upload instanceof UploadedFile) {
+                    $uploadSources[] = $upload->getRealPath();
+                }
+            }
+        }
+
+        /**
+         * base64 or url loaded
+         */
+        if ($uploads = $request->request->get('files')) {
+            foreach ($uploads as $upload) {
+                $uploadSources[] = $upload;
+            }
+        }
+
+        return $uploadSources;
     }
 
     /**
@@ -97,9 +128,25 @@ class UploadController extends AbstractController
      */
     public function uploadAction(Request $request): JsonResponse
     {
-        $uploadSources = [];
+        $uploadSources = $this->fetchSourceListByRequest($request);
 
+        /**
+         * prepare response (upload, decode, remove and create preview)
+         */
+        $uploadFiles = [];
+        $previewFiles = [];
+        foreach ($uploadSources as $uploadSource) {
+            if ($this->moveFileProcessor->validate($uploadSource)) {
+                $uploadFiles[] = $newFileImage = $this->moveFileProcessor->move($uploadSource);
+                $previewFiles[] = $this->previewMaker->make($newFileImage, self::PREVIEW_W, self::PREVIEW_H);
+            } else {
+                throw new HttpException(400, "Can't detect file source");
+            }
+        }
 
-        return new JsonResponse();
+        return new JsonResponse([
+            'uploads' => $uploadFiles,
+            'previews' => $previewFiles,
+        ]);
     }
 }
