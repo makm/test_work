@@ -23,5 +23,4 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
 
 #set docker-user for 1000 uid
 RUN useradd --shell /bin/bash -u 1000 -o -c "" -m docker-user
-
 WORKDIR "/var/www"
