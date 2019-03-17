@@ -1,8 +1,8 @@
 <?php
 
-namespace App\UploadFileProcess;
+namespace App\Tests\Unit\UploadFileProcess;
 
-
+use App\UploadFileProcess\MoveRemoteFileImageProcessor;
 use PHPUnit\Framework\TestCase;
 
 class MoveRemoteFileImageProcessorTest extends TestCase
@@ -16,7 +16,6 @@ class MoveRemoteFileImageProcessorTest extends TestCase
     {
         $this->object = new MoveRemoteFileImageProcessor('/tmp');
     }
-
 
     public function testValidateTrue()
     {

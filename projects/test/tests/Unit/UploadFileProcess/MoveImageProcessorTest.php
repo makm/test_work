@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\UploadFileProcess;
+namespace App\Tests\Unit\UploadFileProcess;
 
 
 use App\UploadFileProcess\MoveAnySourceFileProcessor;

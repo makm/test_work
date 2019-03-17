@@ -1,7 +1,8 @@
 <?php
 
-namespace App\UploadFileProcess;
+namespace App\Tests\Unit\UploadFileProcess;
 
+use App\UploadFileProcess\AbstractMoveFileProcessor;
 use PHPUnit\Framework\TestCase;
 
 class AbstractMoveImageProcessorTest extends TestCase

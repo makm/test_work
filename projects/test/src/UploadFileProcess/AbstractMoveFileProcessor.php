@@ -29,8 +29,6 @@ abstract class AbstractMoveFileProcessor implements MoveFileProcessorInterface
     public function setTargetPath($path): MoveFileProcessorInterface
     {
         $this->targetPath = \rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-//        die($this->targetPath);
-//        mkdir($this->targetPath, 0777, true);
         return $this;
     }
 

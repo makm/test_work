@@ -5,7 +5,8 @@ cd test_work
 docker-compose up -d
 docker-compose exec --user 1000 test_php-fpm composer install -d /var/www/test/
 
-
+docker-compose exec --user 1000 test_php-fpm php /var/www/test/vendor/phpunit/phpunit/phpunit --configuration /var/www/test/phpunit.xml /var/www/test/tests/Functional --strict-coverage
+docker-compose exec --user 1000 test_php-fpm php /var/www/test/vendor/phpunit/phpunit/phpunit --configuration /var/www/test/phpunit.xml /var/www/test/tests/Unit --dont-report-useless-tests
 
 
 

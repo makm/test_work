@@ -1,9 +1,10 @@
 <?php
 
-namespace App\UploadFileProcess;
+namespace App\Tests\Unit\UploadFileProcess;
 
 
 use App\UploadFileProcess\Exception\RuntimeException;
+use App\UploadFileProcess\MoveFileProcessor;
 use PHPUnit\Framework\TestCase;
 
 class MoveFileMoveProcessorTest extends TestCase
@@ -16,7 +17,7 @@ class MoveFileMoveProcessorTest extends TestCase
     /**
      * @var string
      */
-    private $fileTestPath = __DIR__ . '/resource/testfile.jpg';
+    private $fileTestPath = __DIR__.'/resource/testfile.jpg';
 
     /**
      * @var MoveFileProcessor

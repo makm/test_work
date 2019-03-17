@@ -1,8 +1,9 @@
 <?php
 
-namespace App\UploadFileProcess;
+namespace App\Tests\Unit\UploadFileProcess;
 
 use App\UploadFileProcess\Exception\RuntimeException;
+use App\UploadFileProcess\MoveBase64ImageProcessor;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,7 +20,7 @@ class MoveBase64ImageProcessorTest extends TestCase
     /**
      * @var string
      */
-    private $fileTestPath = __DIR__ . '/resource/testfile.jpg';
+    private $fileTestPath = __DIR__.'/resource/testfile.jpg';
 
 
     public function setUp()
@@ -37,7 +38,7 @@ class MoveBase64ImageProcessorTest extends TestCase
      * @return array
      * @throws \Exception
      */
-    public function validateFalseDataProvider()
+    public function validateFalseDataProvider(): array
     {
         return [
             [
