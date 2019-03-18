@@ -7,10 +7,6 @@
 .idea/
 public/upload/
 
-###> phpunit/phpunit ###
-/phpunit.xml
-###< phpunit/phpunit ###
-
 ###> symfony/webpack-encore-pack ###
 /node_modules/
 /public/build/
