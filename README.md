@@ -1,4 +1,11 @@
 ## Общее
+Проект реализован на php7.2/Symfony4.2
+
+каталог проекта projects/test
+
+
+
+
 #####  установка запуск
 ```
 git clone https://github.com/makm/test_work.git
@@ -45,6 +52,12 @@ http://test-work/api/upload
     ]
 }
 ````
+мы получили относительные ссылки на оригинальный файл и превью, доступные по адресам:
+
+http://test-work/upload/683206e5af24f423f89c9f91ff5ce3ba.jpeg
+http://test-work/upload/683206e5af24f423f89c9f91ff5ce3ba_100x100.jpeg
+
+
 
 ##### @todo (что можно доделать):
 1) переписать тесты с использованием vfsStream 
