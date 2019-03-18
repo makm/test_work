@@ -12,5 +12,5 @@ interface MoveFileProcessorInterface
 
     public function validate($fileSource): bool;
 
-    public function move($fileSource, $validate = true): ?string;
+    public function move($fileSource, $validate = true): ?MovedFile;
 }

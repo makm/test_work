@@ -29,13 +29,13 @@ services:
 
   App\UploadFileProcess\MoveFileProcessor:
     arguments:
-      - '/var/www/test/public/upload/'
+      - '%kernel.project_dir%/public/%env(UPLOAD_PATH)%'
   App\UploadFileProcess\MoveRemoteFileProcessor:
     arguments:
-      - '/var/www/test/public/upload/'
+      - '%kernel.project_dir%/public/%env(UPLOAD_PATH)%'
   App\UploadFileProcess\MoveBase64FileProcessor:
     arguments:
-      - '/var/www/test/public/upload/'
+      - '%kernel.project_dir%/public/%env(UPLOAD_PATH)%'
 
 
   App\UploadFileProcess\MoveFileProcessorInterface:

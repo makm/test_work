@@ -4,6 +4,7 @@ namespace App\Tests\Unit\UploadFileProcess;
 
 
 use App\UploadFileProcess\MoveAnySourceFileProcessor;
+use App\UploadFileProcess\MovedFile;
 use App\UploadFileProcess\MoveFileProcessorInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -45,7 +46,7 @@ class MoveImageProcessorTest extends TestCase
     public function testMove()
     {
         // incorrect  processor
-        $file = '/filename.jpg';
+        $file = new MovedFile('/tmp','/filename.jpg');
         $processor1 = $this->createMock(MoveFileProcessorInterface::class);
         $processor1->expects($this->once())
             ->method('validate')

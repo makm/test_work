@@ -68,9 +68,9 @@ class MoveAnySourceFileProcessor implements MoveFileProcessorInterface
     /**
      * @param $fileSource
      * @param bool $validate
-     * @return null|string
+     * @return null|MovedFile
      */
-    public function move($fileSource, $validate = true): ?string
+    public function move($fileSource, $validate = true): ?MovedFile
     {
         if (!$processor = $this->searchProcessor($fileSource)) {
             throw new RuntimeException('Can\'t detect processor for use');

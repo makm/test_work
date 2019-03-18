@@ -1,23 +1,25 @@
-<h4>Общее</h4>
-<h5>установка запуск</h5>
+##Общее
+#####установка запуск
 git clone https://github.com/makm/test_work.git
 cd test_work
 docker-compose up -d
 docker-compose exec --user 1000 test_php-fpm composer install -d /var/www/test/
 
-#добавить в hosts 
+#####добавить в hosts 
 127.0.0.1	test-work
 
-#документация доступна 
+#####документация доступна 
 http://test-work/api/doc
 
-#прогнать фнкциональные тесты
+#####прогнать фнкциональные тесты
 docker-compose exec --user 1000 test_php-fpm php /var/www/test/vendor/phpunit/phpunit/phpunit --configuration /var/www/test/phpunit.xml /var/www/test/tests/Functional
-#прогнать юнит тесты
+#####прогнать юнит тесты
 docker-compose exec --user 1000 test_php-fpm php /var/www/test/vendor/phpunit/phpunit/phpunit --configuration /var/www/test/phpunit.xml /var/www/test/tests/Unit
 
+##### коллекция потестировать Postman'ом
+test.postman_collection.json
 
-@todo:
+##### @todo (что можно доделать):
 1) переписать тесты с использованием vfsStream 
 2) оптимизировать перемещение файла
 3) оптимизировать скачивание файла
@@ -29,4 +31,5 @@ docker-compose exec --user 1000 test_php-fpm php /var/www/test/vendor/phpunit/ph
 5) тест для DetectFileExtension
 6) Расширить тесты (доработать текущие)
 7) выделить генератор названия файлов в отдельный сервис
+8) пережимать превью на лету
 .... добавить логи, токен

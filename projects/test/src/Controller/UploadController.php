@@ -47,6 +47,7 @@ class UploadController extends AbstractController
         /** json body content (only)*/
         if ($content = $request->getContent()) {
             $parametersAsArray = json_decode($content, true);
+
             return $parametersAsArray['files'] ?? [];
         }
 
@@ -74,6 +75,15 @@ class UploadController extends AbstractController
         }
 
         return $uploadSources;
+    }
+
+    /**
+     * @param $file
+     * @return string
+     */
+    private function createImageUploadUrl($file): string
+    {
+        return DIRECTORY_SEPARATOR.getenv('UPLOAD_PATH').$file;
     }
 
     /**
@@ -137,8 +147,20 @@ class UploadController extends AbstractController
         $previewFiles = [];
         foreach ($uploadSources as $uploadSource) {
             if ($this->moveFileProcessor->validate($uploadSource)) {
-                $uploadFiles[] = $newFileImage = $this->moveFileProcessor->move($uploadSource);
-                $previewFiles[] = $this->previewMaker->make($newFileImage, self::PREVIEW_W, self::PREVIEW_H);
+                $newFileImage = $this->moveFileProcessor->move($uploadSource);
+
+                if (!$newFileImage) {
+                    continue;
+                }
+
+                $newPreviewFileImage = $this->previewMaker->make(
+                    $newFileImage->getPath(),
+                    $newFileImage->getName(),
+                    self::PREVIEW_W,
+                    self::PREVIEW_H
+                );
+                $uploadFiles[] = $this->createImageUploadUrl($newFileImage->getName());
+                $previewFiles[] = $this->createImageUploadUrl($newPreviewFileImage);
             } else {
                 throw new HttpException(400, "Can't detect file source");
             }

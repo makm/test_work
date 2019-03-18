@@ -25,10 +25,10 @@ class MoveFileProcessor extends AbstractMoveFileProcessor
     /**
      * @param $fileSource
      * @param bool $validate
-     * @return string|null
+     * @return MovedFile|null
      * @throws \Exception
      */
-    public function move($fileSource, $validate = true): ?string
+    public function move($fileSource, $validate = true): ?MovedFile
     {
         if (!$this->validate($fileSource)) {
             throw new RuntimeException('File not found, can\'t decode');
@@ -36,8 +36,9 @@ class MoveFileProcessor extends AbstractMoveFileProcessor
 
         $filename = random_int(111111, 999999);
         $ext = $this->getExtension($fileSource);
-        $newFullFilePath = $this->targetPath . $filename . ($ext ? '.' . $ext : '');
-        rename($fileSource, $newFullFilePath);
-        return $newFullFilePath;
+        $fileName = $filename.($ext ? '.'.$ext : '');
+        rename($fileSource, $this->targetPath.$fileName);
+
+        return new MovedFile($this->targetPath, $fileName);
     }
 }

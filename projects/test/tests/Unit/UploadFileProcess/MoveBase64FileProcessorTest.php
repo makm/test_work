@@ -70,12 +70,16 @@ class MoveBase64FileProcessorTest extends TestCase
         $b64code = base64_encode(file_get_contents($this->fileTestPath));
         $filename = $this->object->move($b64code);
 
-        $this->assertFileExists($filename);
-        $this->assertEquals($md5file, md5_file($filename));
-        $this->assertEquals('jpeg', pathinfo($filename, PATHINFO_EXTENSION));
-        unlink($filename);
+
+        $this->assertFileExists($filename->getFullPath());
+        $this->assertEquals($md5file, md5_file($filename->getFullPath()));
+        $this->assertEquals('jpeg', pathinfo($filename->getName(), PATHINFO_EXTENSION));
+        unlink($filename->getFullPath());
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testMoveFail()
     {
         $this->expectException(RuntimeException::class);

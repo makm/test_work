@@ -20,32 +20,24 @@ class PreviewMaker
     {
         $parts = pathinfo($filename);
 
-        return $parts['dirname']
-            . DIRECTORY_SEPARATOR
-            . "{$parts['filename']}_{$w}x{$h}.{$parts['extension']}";
+        return "{$parts['filename']}_{$w}x{$h}.{$parts['extension']}";
     }
 
     /**
-     * @param $filename
-     */
-    private function createFilePreviewUrl($filename)
-    {
-
-    }
-
-    /**
+     * @param $path
      * @param $filename
      * @param $w
      * @param $h
      * @return string
      * @throws \Gumlet\ImageResizeException
      */
-    public function make($filename, $w, $h): string
+    public function make($path, $filename, $w, $h): string
     {
-        $imageResize = new ImageResize($filename);
+        $imageResize = new ImageResize($path.$filename);
         $previewName = $this->createFilePreviewName($filename, $w, $h);
         $imageResize->resize($w, $h);
-        $imageResize->save($previewName);
+        $imageResize->save($path.$previewName);
+
         return $previewName;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Tests\Unit\UploadFileProcess;
 
 use App\UploadFileProcess\AbstractMoveFileProcessor;
+use App\UploadFileProcess\MovedFile;
 use PHPUnit\Framework\TestCase;
 
 class AbstractMoveImageProcessorTest extends TestCase
@@ -23,7 +24,7 @@ class MoveProcessorTestClass extends AbstractMoveFileProcessor
         return false;
     }
 
-    public function move($fileSource, $validate = true): ?string
+    public function move($fileSource, $validate = true): ?MovedFile
     {
         return null;
     }

@@ -61,7 +61,7 @@ class MoveFileMoveProcessorTest extends TestCase
     {
         $this->assertFileExists($this->uploadedFile);
         $filename = $this->object->move($this->uploadedFile);
-        $this->assertFileExists($filename);
+        $this->assertFileExists($filename->getFullPath());
         $this->assertFileNotExists($this->uploadedFile);
     }
 
