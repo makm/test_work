@@ -2,19 +2,19 @@
 
 namespace App\Tests\Unit\UploadFileProcess;
 
-use App\UploadFileProcess\MoveRemoteFileImageProcessor;
+use App\UploadFileProcess\MoveRemoteFileProcessor;
 use PHPUnit\Framework\TestCase;
 
-class MoveRemoteFileImageProcessorTest extends TestCase
+class MoveRemoteFileProcessorTest extends TestCase
 {
     /**
-     * @var MoveRemoteFileImageProcessor
+     * @var MoveRemoteFileProcessor
      */
     private $object;
 
     public function setUp()
     {
-        $this->object = new MoveRemoteFileImageProcessor('/tmp');
+        $this->object = new MoveRemoteFileProcessor('/tmp');
     }
 
     public function testValidateTrue()
@@ -35,8 +35,8 @@ class MoveRemoteFileImageProcessorTest extends TestCase
      */
     public function testMove()
     {
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+//        $this->markTestIncomplete(
+//            'This test has not been implemented yet.'
+//        );
     }
 }

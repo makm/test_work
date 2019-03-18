@@ -30,10 +30,10 @@ services:
   App\UploadFileProcess\MoveFileProcessor:
     arguments:
       - '/var/www/test/public/upload/'
-  App\UploadFileProcess\MoveRemoteFileImageProcessor:
+  App\UploadFileProcess\MoveRemoteFileProcessor:
     arguments:
       - '/var/www/test/public/upload/'
-  App\UploadFileProcess\MoveBase64ImageProcessor:
+  App\UploadFileProcess\MoveBase64FileProcessor:
     arguments:
       - '/var/www/test/public/upload/'
 
@@ -45,6 +45,6 @@ services:
         arguments:
           - {
             'file':'@App\UploadFileProcess\MoveFileProcessor',
-            'url':'@App\UploadFileProcess\MoveRemoteFileImageProcessor',
-            'b64': '@App\UploadFileProcess\MoveBase64ImageProcessor'
+            'url':'@App\UploadFileProcess\MoveRemoteFileProcessor',
+            'b64': '@App\UploadFileProcess\MoveBase64FileProcessor'
             }

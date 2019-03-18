@@ -3,17 +3,17 @@
 namespace App\Tests\Unit\UploadFileProcess;
 
 use App\UploadFileProcess\Exception\RuntimeException;
-use App\UploadFileProcess\MoveBase64ImageProcessor;
+use App\UploadFileProcess\MoveBase64FileProcessor;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class MoveBase64ImageProcessorTest
+ * Class MoveBase64FileProcessorTest
  * @package App\UploadFileProcess
  */
-class MoveBase64ImageProcessorTest extends TestCase
+class MoveBase64FileProcessorTest extends TestCase
 {
     /**
-     * @var MoveBase64ImageProcessor
+     * @var MoveBase64FileProcessor
      */
     private $object;
 
@@ -25,7 +25,7 @@ class MoveBase64ImageProcessorTest extends TestCase
 
     public function setUp()
     {
-        $this->object = new MoveBase64ImageProcessor('/tmp');
+        $this->object = new MoveBase64FileProcessor('/tmp');
     }
 
     public function testValidateTrue()

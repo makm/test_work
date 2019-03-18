@@ -19,14 +19,14 @@ services:
        - "80:80"
 
     test_php-fpm:
-      build: docker/php-fpm
+      build:
+         context: ./docker/php-fpm
+         dockerfile: Dockerfile
       container_name: test_php-fpm
       working_dir: /var/www
       volumes:
         - ./projects:/var/www
         - ./docker/php-fpm/pool.d:/etc/php/7.2/fpm/pool.d
-        #- ./docker/php-fpm/php-fpm.conf:/etc/php/7.1/fpm/php-fpm.conf
-        #- ./docker/php-fpm/php.ini:/etc/php/7.1/fpm/php.ini
-        - ./docker_var/logs/php-fpm/php-fpm.log:/var/log/php-fpm.log
+        - ./docker_var/logs/php-fpm/:/var/log/
       ports:
        - "9000:9000"

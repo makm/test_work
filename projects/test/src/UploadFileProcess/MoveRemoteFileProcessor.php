@@ -6,10 +6,10 @@ use App\UploadFileProcess\Exception\RuntimeException;
 use App\UploadFileProcess\Traits\DetectFileExtension;
 
 /**
- * Class MoveRemoteFileImageProcessor
+ * Class MoveRemoteFileProcessor
  * @package App\UploadFileProcess
  */
-class MoveRemoteFileImageProcessor extends AbstractMoveFileProcessor
+class MoveRemoteFileProcessor extends AbstractMoveFileProcessor
 {
     use DetectFileExtension;
 

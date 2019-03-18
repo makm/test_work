@@ -5,23 +5,28 @@ cd test_work
 docker-compose up -d
 docker-compose exec --user 1000 test_php-fpm composer install -d /var/www/test/
 
-docker-compose exec --user 1000 test_php-fpm php /var/www/test/vendor/phpunit/phpunit/phpunit --configuration /var/www/test/phpunit.xml /var/www/test/tests/Functional --strict-coverage
-docker-compose exec --user 1000 test_php-fpm php /var/www/test/vendor/phpunit/phpunit/phpunit --configuration /var/www/test/phpunit.xml /var/www/test/tests/Unit --dont-report-useless-tests
+#добавить в hosts 
+127.0.0.1	test-work
 
+#документация доступна 
+http://test-work/api/doc
+
+#прогнать фнкциональные тесты
+docker-compose exec --user 1000 test_php-fpm php /var/www/test/vendor/phpunit/phpunit/phpunit --configuration /var/www/test/phpunit.xml /var/www/test/tests/Functional
+#прогнать юнит тесты
+docker-compose exec --user 1000 test_php-fpm php /var/www/test/vendor/phpunit/phpunit/phpunit --configuration /var/www/test/phpunit.xml /var/www/test/tests/Unit
 
 
 @todo:
-
-1) переписать тесты на vfs 
+1) переписать тесты с использованием vfsStream 
 2) оптимизировать перемещение файла
 3) оптимизировать скачивание файла
     - можно использовать guzzle и класе-загрузчике 
-    - в этой связи и нет теста move класса MoveRemoteFileImageProcessor
+    - в этой связи и нет теста move класса MoveRemoteFileProcessor
     - для теста использовать так же vfsStream
 
-4) при валидации base64 можно кешировать результат, что бы заного его не декодировать (увеличив производительность)
+4) при валидации base64 можно кешировать результат, что бы заного его не декодировать
 5) тест для DetectFileExtension
-6) Можно переименовать imageProcessor в fileProcessor т.к в процессе разработки стало ясно, что он универсальный будет
-7) action можно порефакторить и добавить тест
-8) выделить генератор названия файлов в отдельный сервис
+6) Расширить тесты (доработать текущие)
+7) выделить генератор названия файлов в отдельный сервис
 .... добавить логи, токен

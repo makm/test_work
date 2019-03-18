@@ -3,7 +3,7 @@
 namespace App\UploadFileProcess;
 
 /**
- * Class AbstractMoveImageProcessor
+ * Class AbstractMoveFileProcessor
  * @package App\UploadFileProcess
  */
 abstract class AbstractMoveFileProcessor implements MoveFileProcessorInterface
@@ -14,8 +14,8 @@ abstract class AbstractMoveFileProcessor implements MoveFileProcessorInterface
     protected $targetPath;
 
     /**
-     * MoveBase64ImageProcessor constructor.
-     * @param $targetPath
+     * AbstractMoveFileProcessor constructor.
+     * @param string $targetPath
      */
     public function __construct(string $targetPath)
     {

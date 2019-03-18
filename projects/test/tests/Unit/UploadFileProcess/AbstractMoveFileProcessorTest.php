@@ -10,13 +10,13 @@ class AbstractMoveImageProcessorTest extends TestCase
 
     public function testSetGetTargetPath()
     {
-        $object = new RealClass('/nothing');
+        $object = new MoveProcessorTestClass('/nothing');
         $object->setTargetPath('/some/bad/path///');
         $this->assertEquals('/some/bad/path/', $object->getTargetPath());
     }
 }
 
-class RealClass extends AbstractMoveFileProcessor
+class MoveProcessorTestClass extends AbstractMoveFileProcessor
 {
     public function validate($fileSource): bool
     {
